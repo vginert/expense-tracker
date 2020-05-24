@@ -1,7 +1,8 @@
-package com.vginert.expensetracker
+package com.vginert.expensetracker.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.vginert.expensetracker.R
 
 class MainActivity : AppCompatActivity() {
 
