@@ -36,6 +36,7 @@ dependencies {
 
     // Test dependencies
     testImplementation "junit:junit:${versions.junit}"
+    testImplementation "io.mockk:mockk:${versions.mockk}"
 
     // Instrumentation test dependencies
     androidTestImplementation "androidx.test.ext:junit:${versions.android_junit}"
