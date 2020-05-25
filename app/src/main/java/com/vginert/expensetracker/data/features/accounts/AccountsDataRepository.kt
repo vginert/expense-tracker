@@ -6,9 +6,9 @@ import com.vginert.expensetracker.domain.features.accounts.AccountDetail
 import com.vginert.expensetracker.domain.features.accounts.AccountsRepository
 
 val mockAccounts = listOf(
-    Account(0, "Cash", 100.23F),
-    Account(1, "Credit Card", -0.99F),
-    Account(2, "Bank account", 10002.56F)
+    Account(0, "Cash"),
+    Account(1, "Credit Card"),
+    Account(2, "Bank account")
 )
 
 class AccountsDataRepository : AccountsRepository {

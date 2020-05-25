@@ -4,14 +4,12 @@ import com.vginert.expensetracker.domain.features.accounts.Account
 
 data class AccountModel(
     val id: Int,
-    val name: String,
-    val balance: Float
+    val name: String
 ) {
     override fun toString(): String = name
 }
 
 fun Account.toPresentation() = AccountModel(
     id,
-    name,
-    balance
+    name
 )
