@@ -9,6 +9,7 @@ import com.vginert.expensetracker.data.features.categories.CategoriesDataReposit
 import com.vginert.expensetracker.data.features.transactions.TransactionsDataRepository
 import com.vginert.expensetracker.domain.core.exceptions.ExceptionHandler
 import com.vginert.expensetracker.domain.features.accounts.AccountsRepository
+import com.vginert.expensetracker.domain.features.accounts.use_cases.GetAccountsDetailsUseCase
 import com.vginert.expensetracker.domain.features.accounts.use_cases.GetUserAccountsUseCase
 import com.vginert.expensetracker.domain.features.categories.CategoriesRepository
 import com.vginert.expensetracker.domain.features.categories.use_cases.GetCategoriesByTypeUseCase
@@ -41,12 +42,13 @@ val appModule = module {
 
     // region Use Cases
     factory { GetUserAccountsUseCase(get()) }
+    factory { GetAccountsDetailsUseCase(get()) }
     factory { GetCategoriesByTypeUseCase(get()) }
     factory { CreateTransactionUseCase(get()) }
     // endregion
 
     // region ViewModels
-    viewModel { DashboardViewModel(get()) }
+    viewModel { DashboardViewModel(get(), get()) }
     viewModel { TransactionViewModel(get(), get(), get(), get()) }
     // endregion
 }
