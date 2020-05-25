@@ -6,7 +6,7 @@ import com.vginert.expensetracker.domain.features.transactions.Transaction
 import com.vginert.expensetracker.domain.features.transactions.TransactionsRepository
 import java.util.*
 
-val transactions = mutableListOf<Transaction>()
+val mockTransactions = mutableListOf<Transaction>()
 
 class TransactionsDataRepository : TransactionsRepository {
 
@@ -18,6 +18,6 @@ class TransactionsDataRepository : TransactionsRepository {
             ?: throw IllegalArgumentException("Category not found")
 
         val transaction = Transaction(0, account, category, amount, Date())
-        transactions.add(transaction)
+        mockTransactions.add(transaction)
     }
 }
