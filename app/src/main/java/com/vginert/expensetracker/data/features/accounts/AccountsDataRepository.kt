@@ -19,7 +19,10 @@ class AccountsDataRepository : AccountsRepository {
     // TODO implement real repo, this is mock data for development.
     override suspend fun getAccountsDetails(): List<AccountDetail> {
         return mockAccounts.map { account ->
-            val transactions = mockTransactions.filter { it.account.id == account.id }.take(10)
+            val transactions = mockTransactions
+                .filter { it.account.id == account.id }
+                .take(10)
+                .sortedByDescending { it.time }
             AccountDetail(
                 account,
                 transactions,

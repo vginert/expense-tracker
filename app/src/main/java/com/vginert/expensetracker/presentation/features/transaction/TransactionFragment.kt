@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.tiper.MaterialSpinner
 import com.vginert.expensetracker.R
 import com.vginert.expensetracker.presentation.core.fragments.BaseFragment
+import com.vginert.expensetracker.presentation.core.input.hideKeyboard
 import com.vginert.expensetracker.presentation.core.lifecycle.observe
 import com.vginert.expensetracker.presentation.core.lifecycle.observeEvent
 import com.vginert.expensetracker.presentation.core.models.AccountModel
@@ -124,6 +125,7 @@ class TransactionFragment : BaseFragment() {
     }
 
     private fun navigateBack() {
+        hideKeyboard()
         findNavController().navigateUp()
     }
 }

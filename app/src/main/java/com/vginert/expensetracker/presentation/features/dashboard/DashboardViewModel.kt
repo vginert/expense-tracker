@@ -28,15 +28,11 @@ class DashboardViewModel(
         it.map(AccountDetail::toPresentation)
     }
 
-    init {
-        fetchAccountsDetails()
-    }
-
     fun onCreateTransactionClick() {
         _goToCreateTransaction.value = Event(Unit)
     }
 
-    private fun fetchAccountsDetails() = launch(Main) {
+    fun fetchAccountsDetails() = launch(Main) {
         _accountsDetails.value = withContext(IO) { getAccountsDetailsUseCase() }
     }
 }

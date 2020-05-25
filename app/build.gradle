@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
@@ -33,11 +34,17 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // External dependencies
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
+    implementation "com.airbnb.android:epoxy:${versions.epoxy}"
+    kapt "com.airbnb.android:epoxy-processor:${versions.epoxy}"
     implementation "androidx.constraintlayout:constraintlayout:${versions.constraint_layout}"
     implementation "androidx.core:core-ktx:${versions.core_ktx}"
     implementation "org.koin:koin-android:${versions.koin}"

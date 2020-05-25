@@ -27,8 +27,31 @@ class DashboardFragment : BaseFragment() {
         createTransactionButton.setOnClickListener { viewModel.onCreateTransactionClick() }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchAccountsDetails()
+    }
+
     private fun renderAccountsDetails(accountsDetails: List<AccountDetailModel>) {
-        accountsDetails.map {  }
+        accountsDetailsRecyclerView.withModels {
+            accountsDetails.forEach { accountDetails ->
+                accountHeader {
+                    id("header-${accountDetails.account.id}")
+                    name(accountDetails.account.name)
+                    balance(accountDetails.balance)
+                }
+
+                accountDetails.transactions.sortedByDescending { it.time }.forEach { transaction ->
+                    accountTransactionDetail {
+                        id("transaction-${transaction.id}")
+                        categoryName(transaction.category.name)
+                        amount(transaction.amount)
+                        time(transaction.time)
+                        type(transaction.category.type)
+                    }
+                }
+            }
+        }
     }
 
     private fun navigateToCreateTransaction() {
