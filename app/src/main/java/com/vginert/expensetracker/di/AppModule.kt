@@ -47,6 +47,6 @@ val appModule = module {
 
     // region ViewModels
     viewModel { DashboardViewModel(get()) }
-    viewModel { TransactionViewModel(get()) }
+    viewModel { TransactionViewModel(get(), get(), get(), get()) }
     // endregion
 }

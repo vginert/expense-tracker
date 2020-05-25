@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Expense Tracker</string>
+
+    <string name="transaction_title">Create Transaction</string>
+    <string name="transaction_save">Save</string>
+    <string name="transaction_type_expense">Expense</string>
+    <string name="transaction_type_income">Income</string>
+    <string name="transaction_account_hint">Select account</string>
+    <string name="transaction_category_hint">Select category</string>
+    <string name="transaction_amount_hint">Enter amount</string>
+    <string name="transaction_account_required_error">Account must not be empty</string>
+    <string name="transaction_amount_required_error">Amount must not be empty</string>
+    <string name="transaction_category_required_error">Category must not be empty</string>
 </resources>

@@ -1,13 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/window_padding"
     tools:context=".presentation.features.transaction.TransactionFragment">
 
-    <TextView
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Transaction" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation='horizontal'>
 
-</FrameLayout>
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/expenseRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transaction_type_expense" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/incomeRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transaction_type_income" />
+
+    </RadioGroup>
+
+    <com.tiper.MaterialSpinner
+        android:id="@+id/accountsSpinner"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/form_item_padding_top"
+        android:hint="@string/transaction_account_hint"
+        app:errorEnabled="true" />
+
+    <com.tiper.MaterialSpinner
+        android:id="@+id/categoriesSpinner"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/form_item_padding_top"
+        android:hint="@string/transaction_category_hint"
+        app:errorEnabled="true" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/amountTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/form_item_padding_top"
+        android:hint="@string/transaction_amount_hint"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/amountEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal|numberSigned" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>
