@@ -1,6 +1,8 @@
 package com.vginert.expensetracker.data.features.accounts
 
-import com.vginert.expensetracker.data.features.transactions.mockTransactions
+import com.vginert.expensetracker.data.features.accounts.room_data_source.AccountDetailsEntity
+import com.vginert.expensetracker.data.features.accounts.room_data_source.AccountEntity
+import com.vginert.expensetracker.data.features.accounts.room_data_source.AccountsDao
 import com.vginert.expensetracker.domain.features.accounts.Account
 import com.vginert.expensetracker.domain.features.accounts.AccountDetail
 import com.vginert.expensetracker.domain.features.accounts.AccountsRepository
@@ -11,23 +13,13 @@ val mockAccounts = listOf(
     Account(2, "Bank account")
 )
 
-class AccountsDataRepository : AccountsRepository {
+class AccountsDataRepository(
+    private val accountsDao: AccountsDao
+) : AccountsRepository {
 
-    // TODO implement real repo, this is mock data for development.
-    override suspend fun getUserAccounts(): List<Account> = mockAccounts
+    override suspend fun getUserAccounts(): List<Account> =
+        accountsDao.getAll().map(AccountEntity::toDomain)
 
-    // TODO implement real repo, this is mock data for development.
-    override suspend fun getAccountsDetails(): List<AccountDetail> {
-        return mockAccounts.map { account ->
-            val transactions = mockTransactions
-                .filter { it.account.id == account.id }
-                .take(10)
-                .sortedByDescending { it.time }
-            AccountDetail(
-                account,
-                transactions,
-                transactions.map { it.amount }.sum()
-            )
-        }
-    }
+    override suspend fun getAccountsDetails(): List<AccountDetail> =
+        accountsDao.getAccountsDetails().map(AccountDetailsEntity::toDomain)
 }

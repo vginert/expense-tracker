@@ -1,5 +1,7 @@
 package com.vginert.expensetracker.di
 
+import androidx.room.Room
+import com.vginert.expensetracker.data.core.database.ExpenseTrackerDatabase
 import com.vginert.expensetracker.data.core.exceptions.handlers.ExceptionHandlersWrapper
 import com.vginert.expensetracker.data.core.exceptions.handlers.FirebaseExceptionHandler
 import com.vginert.expensetracker.data.core.exceptions.handlers.LogExceptionHandler
@@ -17,8 +19,12 @@ import com.vginert.expensetracker.domain.features.transactions.TransactionsRepos
 import com.vginert.expensetracker.domain.features.transactions.use_cases.CreateTransactionUseCase
 import com.vginert.expensetracker.presentation.features.dashboard.DashboardViewModel
 import com.vginert.expensetracker.presentation.features.transaction.TransactionViewModel
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+
+
+private const val DATABASE_NAME = "expense-tracker"
 
 val appModule = module {
 
@@ -34,10 +40,23 @@ val appModule = module {
     }
     // endregion
 
+    // region Database
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            ExpenseTrackerDatabase::class.java,
+            DATABASE_NAME
+        ).createFromAsset("$DATABASE_NAME.db").build()
+    }
+    single { get<ExpenseTrackerDatabase>().accountsDao() }
+    single { get<ExpenseTrackerDatabase>().categoriesDao() }
+    single { get<ExpenseTrackerDatabase>().transactionsDao() }
+    // endregion
+
     // region Repositories
-    single<AccountsRepository> { AccountsDataRepository() }
-    single<CategoriesRepository> { CategoriesDataRepository() }
-    single<TransactionsRepository> { TransactionsDataRepository() }
+    single<AccountsRepository> { AccountsDataRepository(get()) }
+    single<CategoriesRepository> { CategoriesDataRepository(get()) }
+    single<TransactionsRepository> { TransactionsDataRepository(get()) }
     // endregion
 
     // region Use Cases

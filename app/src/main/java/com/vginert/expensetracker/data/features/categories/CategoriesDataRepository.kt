@@ -1,5 +1,8 @@
 package com.vginert.expensetracker.data.features.categories
 
+import com.vginert.expensetracker.data.features.categories.room_data_sources.CategoriesDao
+import com.vginert.expensetracker.data.features.categories.room_data_sources.CategoryEntity
+import com.vginert.expensetracker.data.features.categories.room_data_sources.toRoomEntity
 import com.vginert.expensetracker.domain.features.categories.CategoriesRepository
 import com.vginert.expensetracker.domain.features.categories.Category
 
@@ -13,9 +16,10 @@ val mockCategories = listOf(
     Category(6, "Dividends", Category.Type.INCOME)
 )
 
-class CategoriesDataRepository : CategoriesRepository {
+class CategoriesDataRepository(
+    private val categoriesDao: CategoriesDao
+) : CategoriesRepository {
 
-    // TODO implement real repo, this is mock data for development.
     override suspend fun getCategoriesFromType(type: Category.Type): List<Category> =
-        mockCategories.filter { it.type == type }
+        categoriesDao.getByType(type.toRoomEntity()).map(CategoryEntity::toDomain)
 }
