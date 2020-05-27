@@ -47,7 +47,7 @@ class DashboardFragment : BaseFragment() {
                         categoryName(transaction.category.name)
                         amount(transaction.amount)
                         time(transaction.time)
-                        type(transaction.category.type)
+                        icon(transaction.category.icon)
                     }
                 }
             }

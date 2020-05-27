@@ -9,17 +9,19 @@ class CategoryEntityTest {
     companion object {
         private const val ID = 12354
         private const val NAME = "Category for tests"
+        private const val ICON = 12
     }
 
     @Test
     fun `On transform to domain should return correct category`() {
-        val categoryEntity = CategoryEntity(ID, NAME, CategoryEntity.EXPENSE_TYPE)
+        val categoryEntity = CategoryEntity(ID, NAME, CategoryEntity.EXPENSE_TYPE, ICON)
 
         val category = categoryEntity.toDomain()
 
         assertEquals(ID, category.id)
         assertEquals(NAME, category.name)
         assertEquals(Category.Type.EXPENSE, category.type)
+        assertEquals(ICON, category.icon)
     }
 
     @Test

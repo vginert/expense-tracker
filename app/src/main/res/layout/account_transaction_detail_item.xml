@@ -13,7 +13,8 @@
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#807D7D"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/categoryNameTextView"

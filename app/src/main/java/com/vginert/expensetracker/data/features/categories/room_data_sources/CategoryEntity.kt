@@ -11,7 +11,8 @@ data class CategoryEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val name: String,
-    val type: Int
+    val type: Int,
+    val icon: Int = -1
 ) {
 
     companion object {
@@ -22,7 +23,8 @@ data class CategoryEntity(
     fun toDomain() = Category(
         id,
         name,
-        typeToDomain(type)
+        typeToDomain(type),
+        icon
     )
 
     private fun typeToDomain(type: Int) = when (type) {
