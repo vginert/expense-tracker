@@ -32,13 +32,6 @@ data class CategoryEntity(
     }
 }
 
-fun Category.toRoomEntity() =
-    CategoryEntity(
-        id,
-        name,
-        type.toRoomEntity()
-    )
-
 fun Category.Type.toRoomEntity() = when (this) {
     Category.Type.EXPENSE -> EXPENSE_TYPE
     Category.Type.INCOME -> INCOME_TYPE

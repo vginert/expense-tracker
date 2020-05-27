@@ -18,6 +18,6 @@ class CreateTransactionUseCaseTest {
 
         runBlocking { createTransactionUseCase(accountId, categoryId, amount) }
 
-        coVerify { transactionsRepository.saveTransaction(accountId, categoryId, amount) }
+        coVerify { transactionsRepository.saveTransaction(accountId, categoryId, amount, any()) }
     }
 }

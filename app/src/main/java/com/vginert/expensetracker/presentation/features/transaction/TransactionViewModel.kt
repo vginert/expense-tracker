@@ -111,6 +111,7 @@ class TransactionViewModel(
         return selectedCategory?.id
     }
 
+    // TODO ensure that amount sign is coherent with category type
     private fun validateAmount(): Float? {
         if (amount == null) {
             _amountValidationError.value = ValidationError.Required
