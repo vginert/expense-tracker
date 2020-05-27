@@ -65,12 +65,12 @@ class TransactionViewModel(
     }
 
     fun onSaveClick() {
-        val accountId = validateUserAccount()
-        val categoryId = validateCategory()
+        val account = validateUserAccount()
+        val category = validateCategory()
         val amount = validateAmount()
-        if (accountId == null || categoryId == null || amount == null) return
+        if (account == null || category == null || amount == null) return
 
-        createTransaction(accountId, categoryId, amount)
+        createTransaction(account, category, amount)
         _goBack.value = Event(Unit)
     }
 
@@ -93,27 +93,26 @@ class TransactionViewModel(
         validateAmount()
     }
 
-    private fun validateUserAccount(): Int? {
+    private fun validateUserAccount(): Account? {
         if (selectedUserAccount?.id == null) {
             _accountValidationError.value = ValidationError.Required
             return null
         }
         _accountValidationError.value = null
-        return selectedUserAccount?.id
+        return selectedUserAccount
     }
 
-    private fun validateCategory(): Int? {
+    private fun validateCategory(): Category? {
         if (selectedCategory?.id == null) {
             _categoryValidationError.value = ValidationError.Required
             return null
         }
         _categoryValidationError.value = null
-        return selectedCategory?.id
+        return selectedCategory
     }
 
-    // TODO ensure that amount sign is coherent with category type
     private fun validateAmount(): Float? {
-        if (amount == null) {
+        if (amount == null || amount == 0F) {
             _amountValidationError.value = ValidationError.Required
             return amount
         }
@@ -121,9 +120,10 @@ class TransactionViewModel(
         return amount
     }
 
-    private fun createTransaction(accountId: Int, categoryId: Int, amount: Float) = launch(Main) {
-        withContext(IO) { createTransactionUseCase(accountId, categoryId, amount) }
-    }
+    private fun createTransaction(account: Account, category: Category, amount: Float) =
+        launch(Main) {
+            withContext(IO) { createTransactionUseCase(account, category, amount) }
+        }
 
     private fun updateCategoryType(categoryType: Type) {
         if (_categoryType.value == categoryType) return
